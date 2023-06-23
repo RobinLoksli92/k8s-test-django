@@ -32,3 +32,28 @@ $ docker-compose run web ./manage.py createsuperuser
 `ALLOWED_HOSTS` -- настройка Django со списком разрешённых адресов. Если запрос прилетит на другой адрес, то сайт ответит ошибкой 400. Можно перечислить несколько адресов через запятую, например `127.0.0.1,192.168.0.1,site.test`. [Документация Django](https://docs.djangoproject.com/en/3.2/ref/settings/#allowed-hosts).
 
 `DATABASE_URL` -- адрес для подключения к базе данных PostgreSQL. Другие СУБД сайт не поддерживает. [Формат записи](https://github.com/jacobian/dj-database-url#url-schema).
+
+## Minikube
+1. Установите [Minikube](https://kubernetes.io/ru/docs/tasks/tools/install-minikube/).
+2. Перейти в дирикторию проекта. Собрать образ проекта командой:
+```
+minikube image build django-image .\backend_main_django
+```
+3. Создать базу данных и пользователя в postgresql.
+4. Поднять созданную БД в docker compose.
+5. Создать `config.yaml` файл:
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dj-conf
+data:
+  DATABASE_URL: указать необходимое
+  SECRET_KEY: указать необходимое
+  DEBUG: "True"
+  ALLOWED_HOSTS: "*"
+```
+6. Запустить команду для запуска сайта:
+```
+kubectl apply -f kubernetes\deploy.yaml
+```

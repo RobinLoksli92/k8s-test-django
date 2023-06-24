@@ -5,6 +5,7 @@ metadata:
   labels:
     app: django-app
 spec:
+  replicas: 3
   selector:
     matchLabels:
       project: django
@@ -16,15 +17,9 @@ spec:
       containers:
         - name : django-container
           image: django_image:latest
-          env:
-          - name: DATABASE_URL
-            value: postgres://admin:123321@192.168.88.233:5544/mydb
-          - name: SECRET_KEY
-            value: secret-key
-          - name: DEBUG
-            value: "True"
-          - name: ALLOWED_HOSTS
-            value: "*"
+          envFrom:
+          - configMapRef:
+             name: dj-conf
           imagePullPolicy: Never
           ports:
             - containerPort: 80
@@ -42,4 +37,3 @@ spec:
       protocol: TCP
       port: 80
       targetPort: 80
-  type: LoadBalancer

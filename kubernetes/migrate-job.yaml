@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: django-migrate
+spec:
+  backoffLimit: 2
+  activeDeadlineSeconds: 100
+  ttlSecondsAfterFinished: 20
+  template:
+    spec:
+      containers:
+      - name: django-container
+        image: django_image
+        command: ['python', 'manage.py', 'migrate', '--noinput']
+        imagePullPolicy: Never
+        envFrom:
+        - configMapRef:
+            name: dj-conf
+      restartPolicy: Never

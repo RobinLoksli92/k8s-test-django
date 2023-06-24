@@ -57,6 +57,10 @@ data:
 ```
 kubectl apply -f kubernetes\config.yaml
 ```
+5. Выполнить миграции командой:
+```
+kubectl apply -f kubernetes\migrate-job.yaml
+```
 6. Запустите сайт:
 ```
 kubectl apply -f kubernetes\deploy.yaml
@@ -66,5 +70,4 @@ kubectl apply -f kubernetes\deploy.yaml
 ```
 kubectl apply -f kubernetes\ingress.yaml
 ```
-
-8. Можно посмотреть свой сайт по адресу [http://star-burger.test/](http://star-burger.test/).
+8. Можно посмотреть сайт по адресу [http://star-burger.test/](http://star-burger.test/).

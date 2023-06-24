@@ -41,7 +41,7 @@ minikube image build django-image .\backend_main_django
 ```
 3. Создать базу данных и пользователя в postgresql.
 4. Поднять созданную БД в docker compose.
-5. Создать `config.yaml` файл:
+5. Создать `config.yaml` файл со следующим содержимым:
 ```
 apiVersion: v1
 kind: ConfigMap
@@ -53,7 +53,18 @@ data:
   DEBUG: "True"
   ALLOWED_HOSTS: "*"
 ```
-6. Запустить команду для запуска сайта:
+Далее, выполнить команду в вашем кластере:
+```
+kubectl apply -f kubernetes\config.yaml
+```
+6. Запустите сайт:
 ```
 kubectl apply -f kubernetes\deploy.yaml
 ```
+7. Пропишите на своей машине в /etc/hosts (для linux) или в C:\Windows\System32\drivers\etc\hosts домен star-burger.test, сопоставить с IP виртуальной машины (узнать ip c помощью команды minikube ip).
+Далее запустите команду:
+```
+kubectl apply -f kubernetes\ingress.yaml
+```
+
+8. Можно посмотреть свой сайт по адресу [http://star-burger.test/](http://star-burger.test/).

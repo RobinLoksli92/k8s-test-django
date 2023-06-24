@@ -49,20 +49,20 @@ metadata:
 data:
   DATABASE_URL: указать необходимое
   SECRET_KEY: указать необходимое
-  DEBUG: "True"
-  ALLOWED_HOSTS: "*"
+  DEBUG: "False"
+  ALLOWED_HOSTS: "star-burger.test"
 ```
 Далее, выполнить команду в вашем кластере:
 ```
 kubectl apply -f kubernetes\config.yaml
 ```
-5. Выполнить миграции командой:
-```
-kubectl apply -f kubernetes\migrate-job.yaml
-```
-6. Запустите сайт:
+5. Задеплойте сайт на Джанго:
 ```
 kubectl apply -f kubernetes\deploy.yaml
+```
+6. Выполнить миграции командой:
+```
+kubectl apply -f kubernetes\migrate-job.yaml
 ```
 7. Пропишите на своей машине в /etc/hosts (для linux) или в C:\Windows\System32\drivers\etc\hosts домен star-burger.test, сопоставить с IP виртуальной машины (узнать ip c помощью команды minikube ip).
 Далее запустите команду:

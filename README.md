@@ -39,9 +39,8 @@ $ docker-compose run web ./manage.py createsuperuser
 ```
 minikube image build django-image .\backend_main_django
 ```
-3. Создать базу данных и пользователя в postgresql.
-4. Поднять созданную БД в docker compose.
-5. Создать `config.yaml` файл со следующим содержимым:
+3. Разверните PostgreSQL в кластере ([пример](https://artifacthub.io/packages/helm/bitnami/postgresql)). Создайте базу данных, пользователя ([пример](https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e)).
+4. Создать `config.yaml` файл со следующим содержимым:
 ```
 apiVersion: v1
 kind: ConfigMap

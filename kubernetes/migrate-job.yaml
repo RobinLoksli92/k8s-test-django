@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
       - name: django-container
-        image: django_image
+        image: django_image:latest
         command: ['python', 'manage.py', 'migrate', '--noinput']
         imagePullPolicy: Never
         envFrom:
